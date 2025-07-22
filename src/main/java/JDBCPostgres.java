@@ -15,14 +15,17 @@ public class JDBCPostgres {
             props.setProperty("password", "postgres");
             //props.setProperty("ssl", "true");
             Connection conn = DriverManager.getConnection(url, props);
-            System.out.println("Sucess CNX");
+
+            String instrucaoSQL = "INSERT INTO public.tab_cadastro (nome, idade) VALUE(?,?);";
 
             PreparedStatement pst = conn.prepareStatement(instrucaoSQL);
             pst.setString(parameterindex: 1, nome);
             pst.setInt(parameterindex, idade);
 
             pst.execute();
+            System.out.println("Sucess CNX");
         }catch (Exception ex){
+            ex.printStackTrace();
             System.out.println("Failed CNX");
         }
     }
